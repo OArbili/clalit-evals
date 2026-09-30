@@ -1,10 +1,16 @@
 # clalit-evals
 
-Turn-level evaluators for an LLM agent, written for a Hebrew-speaking health-fund
-triage assistant and usable for any conversational agent. One object, one verb:
-`Evals().evaluate(turn)` returns a verdict per evaluator, each with the record of how
-it was produced. The package holds the evaluation logic only — no telemetry, no
-storage, no dependencies.
+An evals framework for LLM agents, as a Python package: turn-level evaluators, one
+object and one verb — `Evals().evaluate(turn)` returns a verdict per evaluator, each with
+the record of how it was produced — built to be reported as OpenTelemetry without
+depending on it. Written for a Hebrew-speaking health-fund triage assistant and usable
+for any conversational agent. The package holds the evaluation logic only: no telemetry,
+no storage, no dependencies.
+
+This is a proof of concept. The framework is this package; the proof around it — a REST
+service that hosts it and reports every verdict as OpenTelemetry, sinks for Elastic,
+Langfuse and MLflow, browser UIs, the specification, runs on real exports — is in the
+companion repository, `OArbili/noy`.
 
 This is a private repository; the package is installed from it, by release tag, with credentials that
 can read it — `gh auth login` on a workstation, a fine-grained token in CI, or `git+ssh://git@github.com/...`
@@ -87,8 +93,8 @@ verdicts.to_dict()              # the serialisable form, ids and record included
 
 The record is what a host needs to report or bill each verdict — as OpenTelemetry
 spans and a `gen_ai.evaluation.result` event, a Langfuse score, an MLflow feedback, a
-row in Elastic. The package produces none of those; a host does (the evals platform's
-REST service, which lives in its own repository, is one such host).
+row in Elastic. The package produces none of those; a host does (the POC's REST service,
+in the companion repository, is one such host).
 
 ## Your own evaluator
 

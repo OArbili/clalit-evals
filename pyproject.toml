@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "clalit-evals"
 version = "0.2.0"
-description = "Turn-level evaluators for an LLM agent: Repetition, nine LLM-as-judge dimensions and two reference-based summary evaluators. Evaluation logic only, provider-agnostic."
+description = "An evals framework for LLM agents: turn-level evaluators (Repetition, nine LLM-as-judge dimensions, two reference-based summary evaluators), verdicts that carry their own record, OpenTelemetry-shaped without depending on it. Proof of concept."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"

@@ -3,7 +3,7 @@
 **Status:** approved 5 September 2026 and implemented in
 `src/evals/evaluators/summary_facts.py` (thresholds 0.8 / 1.0, empty LLM summary =
 `missing_input`, as proposed in section 9). Summarised as *Summary fact
-evaluators (release 3)* in the evals platform's requirements document; this document remains the
+evaluators (release 3)* in the POC's requirements document (`OArbili/noy`, docs/EVALS_REQUIREMENTS.md); this document remains the
 full specification. v0.2 added the precision evaluator (v0.1 had capture only).
 
 ## 1. Purpose
@@ -294,4 +294,4 @@ the verdicts and the emitted events.
 | `evals.score` description | `evals_service/telemetry.py` | wording only; the metric name and dimensions stay |
 | `<key>_score` column | `tools/run_csv_evals.py` | added for every evaluator; 1/0 for the binary ones |
 | Synthetic dataset | `tests/data/` | a `reference` and an LLM summary per case, with expected capture and precision ratios; cases for a pure addition, a contradiction, a paraphrase and a changed number; offline e2e with a scripted judge, live e2e against the real judges as today |
-| Spec and reference docs | the platform's requirements document and reference | new evaluator section, the extension attributes, the histogram wording |
+| Spec and reference docs | the POC's requirements document and reference | new evaluator section, the extension attributes, the histogram wording |

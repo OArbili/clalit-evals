@@ -5,7 +5,7 @@ All notable changes to the `clalit-evals` package are documented here. The forma
 
 ## [0.2.0] - 2026-09-30
 
-The first release of the evaluators; the package moved here from the evals platform repository, where
+The first release of the evaluators; the package moved here from the proof-of-concept repository (OArbili/noy), where
 its history up to this point lives. Released as a wheel on the GitHub release, not on PyPI: this repository
 is private. (0.1.0 was a placeholder with a single `hello_world()`, and is what the PyPI name still holds.)
 

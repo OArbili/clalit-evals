@@ -8,8 +8,8 @@ environment is used. The same material is runnable as
 [getting_started/custom_judge_example.py](../getting_started/custom_judge_example.py).
 
 Every public signature has a docstring; `python -c "import evals, pydoc; pydoc.pager = print; help(evals.Evals)"`
-prints them. The REST service that hosts the package in the evals platform (telemetry,
-Elastic / Langfuse / MLflow) lives in its own repository.
+prints them. The REST service that hosts the package in the proof of concept (telemetry,
+Elastic / Langfuse / MLflow) lives in the companion repository, `OArbili/noy`.
 
 ---
 
@@ -278,7 +278,7 @@ errors = [vs for vs in report if vs.errors]          # the rows to look at
 `passed` is `None` on an error verdict, so the rate above counts errors in
 neither side. Storing verdicts (Elastic, Langfuse, MLflow), reporting them as
 OpenTelemetry, reading agent spans back from a trace store — none of that is
-the package's job; the evals platform's REST service does it from the record
+the package's job; the POC's REST service does it from the record
 on each verdict.
 
 ---
@@ -522,4 +522,4 @@ labelled Hebrew/English dataset (`tests/data/`).
 | the two summary evaluators in full | [SUMMARY_FACT_CAPTURE.md](SUMMARY_FACT_CAPTURE.md) |
 | copy a standalone script that runs on the pip-installed package | [examples/](../examples/) |
 | run the examples in learning order | [getting_started/README.md](../getting_started/README.md) |
-| host the package: REST, OpenTelemetry, Elastic / Langfuse / MLflow | the evals platform repository (private) |
+| host the package: REST, OpenTelemetry, Elastic / Langfuse / MLflow | the proof-of-concept repository, `OArbili/noy` (private) |
