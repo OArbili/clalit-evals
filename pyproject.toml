@@ -4,31 +4,32 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clalit-evals"
-version = "0.1.0"
-description = "A minimal Python package with a single function that prints Hello, World!"
+version = "0.2.0"
+description = "Turn-level evaluators for an LLM agent: Repetition, nine LLM-as-judge dimensions and two reference-based summary evaluators. Evaluation logic only, provider-agnostic."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Ofir Arbili", email = "ofir.arbili@gmail.com" }]
-keywords = ["clalit", "evals", "hello-world"]
+keywords = ["evals", "llm", "evaluation", "llm-as-a-judge", "agent", "hebrew", "opentelemetry", "genai"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Testing",
 ]
-dependencies = []
+dependencies = []   # the package needs nothing beyond the standard library; a provider adapter is optional
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "build>=1.2", "twine>=6.1"]
+anthropic = ["anthropic>=1.3"]   # the Anthropic SDK adapter; OpenAI-compatible endpoints need nothing extra
+openai = ["openai>=1.50"]        # the openai SDK client adapter
+dev = ["pytest>=8", "anthropic>=1.3", "openai>=1.50", "build>=1.2", "twine>=6.1"]
 
 [project.urls]
 Homepage = "https://github.com/OArbili/clalit-evals"
@@ -41,3 +42,4 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = ["live: calls the real judge; needs EVALS_LIVE=1 and ANTHROPIC_API_KEY"]
