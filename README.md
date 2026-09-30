@@ -113,6 +113,14 @@ specifies the two summary evaluators.
 Python 3.12 or later. No runtime dependencies; `anthropic` or `openai` only if you use
 that SDK. MIT licence.
 
+## Examples
+
+[examples/](examples/) has five standalone scripts for the installed package — copy one and run it,
+`--offline` for no key: the first call; choosing evaluators and reading every field of a verdict;
+the judge through an `openai` client or an OpenAI-compatible endpoint; your own evaluators three
+ways; fifty turns through a thread pool. The test suite runs them against a freshly built wheel in
+a clean virtual environment, so they are exactly what `pip install clalit-evals` gives you.
+
 ## Development
 
 ```bash
@@ -125,7 +133,7 @@ python3 getting_started/simple_example.py
 
 Layout: `src/evals/` the package (`core.py` is `Evals`; `types.py` the data; `evaluators/` one module per
 evaluator; `providers/` the judge adapters; `vocab.py` the values a verdict is written with);
-`getting_started/` runnable examples in learning order; `tests/` unit and offline end-to-end tests on a
+`examples/` standalone scripts for the installed package; `getting_started/` walkthroughs from a checkout; `tests/` unit and offline end-to-end tests on a
 labelled Hebrew/English dataset (`tests/data/`); `tools/build_evaluator_docs.py` regenerates
 `docs/evaluators/` from the prompts in the code. Releases: bump `version` in `pyproject.toml`, add a
 `CHANGELOG.md` entry, then a GitHub release runs `.github/workflows/publish.yml` (PyPI trusted publishing).

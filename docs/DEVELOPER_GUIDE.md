@@ -517,5 +517,6 @@ labelled Hebrew/English dataset (`tests/data/`).
 | add an evaluator to the repository properly | [ADDING_AN_EVALUATOR.md](ADDING_AN_EVALUATOR.md) |
 | see each built-in evaluator's rule with Hebrew examples | [evaluators/](evaluators/) |
 | the two summary evaluators in full | [SUMMARY_FACT_CAPTURE.md](SUMMARY_FACT_CAPTURE.md) |
+| copy a standalone script that runs on the pip-installed package | [examples/](../examples/) |
 | run the examples in learning order | [getting_started/README.md](../getting_started/README.md) |
 | host the package: REST, OpenTelemetry, Elastic / Langfuse / MLflow | the evals platform repository (private) |
