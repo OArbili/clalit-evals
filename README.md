@@ -6,13 +6,16 @@ triage assistant and usable for any conversational agent. One object, one verb:
 it was produced. The package holds the evaluation logic only — no telemetry, no
 storage, no dependencies.
 
+This is a private repository; the package is installed from it, by release tag, with a key or token
+that can read it (a wheel and sdist are attached to every GitHub release as well):
+
 ```bash
-pip install clalit-evals                # the judge over any OpenAI-compatible endpoint needs nothing more
-pip install "clalit-evals[anthropic]"   # or with the Anthropic SDK
-pip install "clalit-evals[openai]"      # or with the openai SDK client
+pip install "clalit-evals @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"
+pip install "clalit-evals[anthropic] @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"   # + the Anthropic SDK
+pip install "clalit-evals[openai] @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"      # + the openai SDK client
 ```
 
-The import name is `evals`.
+The judge over any OpenAI-compatible endpoint needs nothing beyond the package. The import name is `evals`.
 
 ```python
 from evals import Evals
@@ -119,7 +122,7 @@ that SDK. MIT licence.
 `--offline` for no key: the first call; choosing evaluators and reading every field of a verdict;
 the judge through an `openai` client or an OpenAI-compatible endpoint; your own evaluators three
 ways; fifty turns through a thread pool. The test suite runs them against a freshly built wheel in
-a clean virtual environment, so they are exactly what `pip install clalit-evals` gives you.
+a clean virtual environment, so they are exactly what the installed package gives you.
 
 ## Development
 
@@ -136,4 +139,5 @@ evaluator; `providers/` the judge adapters; `vocab.py` the values a verdict is w
 `examples/` standalone scripts for the installed package; `getting_started/` walkthroughs from a checkout; `tests/` unit and offline end-to-end tests on a
 labelled Hebrew/English dataset (`tests/data/`); `tools/build_evaluator_docs.py` regenerates
 `docs/evaluators/` from the prompts in the code. Releases: bump `version` in `pyproject.toml`, add a
-`CHANGELOG.md` entry, then a GitHub release runs `.github/workflows/publish.yml` (PyPI trusted publishing).
+`CHANGELOG.md` entry, commit, then `gh release create vX.Y.Z`: `.github/workflows/release.yml` builds the wheel
+and sdist and attaches them to the release. Nothing is published outside this repository.

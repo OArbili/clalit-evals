@@ -1,10 +1,10 @@
 """The judge through an openai SDK client, or any OpenAI-compatible endpoint.
 
-    pip install "clalit-evals[openai]"
+    pip install "clalit-evals[openai] @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"
     export OPENAI_API_KEY=...
     python3 03_openai_client.py                    # openai.OpenAI() as the judge, model gpt-5-mini
 
-    pip install clalit-evals                       # no SDK: the endpoint over the standard library
+    pip install "clalit-evals @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"     # no SDK: the endpoint over the standard library
     OPENAI_BASE_URL=http://vllm.internal:8000/v1 EVALS_JUDGE_MODEL=my-judge python3 03_openai_client.py --http
 
     python3 03_openai_client.py --offline          # no key: a client-shaped test double

@@ -16,9 +16,12 @@ Elastic / Langfuse / MLflow) lives in its own repository.
 ## 0. Setup
 
 ```bash
-pip install clalit-evals             # the package (import name: evals); no dependencies
-pip install "clalit-evals[anthropic]"    # + the Anthropic SDK;  [openai] + the openai SDK client
+pip install "clalit-evals @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"              # the package (import name: evals)
+pip install "clalit-evals[anthropic] @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"   # + the Anthropic SDK;  [openai] + the openai SDK client
 ```
+
+(The repository is private: the install needs a key or token that can read it. A wheel is attached
+to every GitHub release too.)
 
 Or from a checkout of the repository, which also has the tests and the examples:
 
