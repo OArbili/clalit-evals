@@ -1,6 +1,6 @@
 """Your own evaluators next to the built-in ones: three ways.
 
-    pip install "clalit-evals @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"
+    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"
     python3 04_custom_evaluator.py --offline       # a function stands in for the judge
     python3 04_custom_evaluator.py                 # the judge from the environment
 

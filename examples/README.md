@@ -1,6 +1,6 @@
 # Examples
 
-Standalone scripts for the installed package: `pip install "clalit-evals @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"` (or a wheel from a GitHub release), copy one, run it. Nothing
+Standalone scripts for the installed package: `pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"` (or a wheel from a GitHub release), copy one, run it. Nothing
 here imports from this repository. Each runs with `--offline` (a function stands in for the judge, no
 key) or against the judge your environment names (`ANTHROPIC_API_KEY`, or `OPENAI_API_KEY` /
 `OPENAI_BASE_URL` with `EVALS_JUDGE_MODEL`).

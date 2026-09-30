@@ -1,6 +1,6 @@
 """Evaluate one agent turn and print the verdicts. Needs only the package:
 
-    pip install "clalit-evals @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"
+    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"
     export ANTHROPIC_API_KEY=...      # or OPENAI_API_KEY (+ OPENAI_BASE_URL for a gateway) and EVALS_JUDGE_MODEL
     python3 01_evaluate_one_turn.py
 

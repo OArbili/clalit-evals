@@ -6,13 +6,14 @@ triage assistant and usable for any conversational agent. One object, one verb:
 it was produced. The package holds the evaluation logic only — no telemetry, no
 storage, no dependencies.
 
-This is a private repository; the package is installed from it, by release tag, with a key or token
-that can read it (a wheel and sdist are attached to every GitHub release as well):
+This is a private repository; the package is installed from it, by release tag, with credentials that
+can read it — `gh auth login` on a workstation, a fine-grained token in CI, or `git+ssh://git@github.com/...`
+with an SSH key (a wheel and sdist are attached to every GitHub release as well):
 
 ```bash
-pip install "clalit-evals @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"
-pip install "clalit-evals[anthropic] @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"   # + the Anthropic SDK
-pip install "clalit-evals[openai] @ git+ssh://git@github.com/OArbili/clalit-evals.git@v0.2.0"      # + the openai SDK client
+pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"
+pip install "clalit-evals[anthropic] @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"   # + the Anthropic SDK
+pip install "clalit-evals[openai] @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"      # + the openai SDK client
 ```
 
 The judge over any OpenAI-compatible endpoint needs nothing beyond the package. The import name is `evals`.
