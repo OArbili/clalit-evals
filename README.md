@@ -122,7 +122,8 @@ that SDK. MIT licence.
 [examples/](examples/) has five standalone scripts for the installed package — copy one and run it,
 `--offline` for no key: the first call; choosing evaluators and reading every field of a verdict;
 the judge through an `openai` client or an OpenAI-compatible endpoint; your own evaluators three
-ways; fifty turns through a thread pool. The test suite runs them against a freshly built wheel in
+ways; fifty turns through a thread pool; an LLM summary against a human reference with the two summary
+evaluators. The test suite runs them against a freshly built wheel in
 a clean virtual environment, so they are exactly what the installed package gives you.
 
 ## Development

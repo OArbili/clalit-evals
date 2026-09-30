@@ -12,6 +12,7 @@ key) or against the judge your environment names (`ANTHROPIC_API_KEY`, or `OPENA
 | `03_openai_client.py` | the judge through `openai.OpenAI()` (`--offline`: a client-shaped double), or any OpenAI-compatible endpoint over the standard library (`--http`) | `clalit-evals[openai]` |
 | `04_custom_evaluator.py` | your own evaluators: a new dimension on the shared rubric, your own prompts, your own answer shape, a deterministic check | `clalit-evals` |
 | `05_many_turns.py` | fifty turns through a thread pool, pass rates and the rows to look at | `clalit-evals` |
+| `06_summary_evaluation.py` | an LLM summary against a human reference: SummaryFactCapture (recall) and SummaryFactPrecision (precision) on three summaries — facts missed, a claim invented, faithful — with `threshold=`, `capture_content=`, the count attributes and the two judge calls per verdict | `clalit-evals` |
 
 `../getting_started/` has the walkthroughs that run from a checkout of this repository (they share a
 stub Anthropic client and print more of what happens inside); `../docs/DEVELOPER_GUIDE.md` explains
