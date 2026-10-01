@@ -11,6 +11,7 @@ that answers without calling the model.
 
 from __future__ import annotations
 
+import functools
 import json
 import logging
 import re
@@ -65,6 +66,17 @@ in the text. Identical inputs must yield identical verdicts.
 English, in one sentence, quoting the decisive words as plain text, never as escape sequences.
 6. If the situation the criteria describe does not arise in this reply, answer "pass" and say so.
 """
+
+
+class _class_or_instance:
+    """A method that receives the instance when called on one, and the class when called on the class."""
+
+    def __init__(self, fn) -> None:
+        self._fn = fn
+        self.__doc__ = fn.__doc__
+
+    def __get__(self, obj, cls=None):
+        return functools.partial(self._fn, obj if obj is not None else cls)
 
 
 class JudgeBacked(Evaluator):
@@ -145,12 +157,15 @@ class LLMJudgeEvaluator(JudgeBacked):
         """Return a verdict without calling the model, or None to ask the judge."""
         return None
 
-    @classmethod
-    def system_prompt(cls) -> str:
-        """The rubric: TEMPLATE with this dimension's name, definition, criteria and note filled in."""
-        criteria = "\n".join(f"- {c}" for c in cls.fail_criteria)
-        note = f" {cls.pass_note.strip()}" if cls.pass_note else ""
-        return TEMPLATE.format(name=cls.name, definition=cls.definition, criteria=criteria, pass_note=note)
+    @_class_or_instance
+    def system_prompt(owner) -> str:
+        """The rubric: TEMPLATE with this dimension's name, definition, criteria and note filled in.
+
+        Callable on the class (its defaults) or on an instance (whatever that instance overrides, such as
+        fail criteria built from a protocol). A subclass may still override it as a plain classmethod."""
+        criteria = "\n".join(f"- {c}" for c in owner.fail_criteria)
+        note = f" {owner.pass_note.strip()}" if owner.pass_note else ""
+        return TEMPLATE.format(name=owner.name, definition=owner.definition, criteria=criteria, pass_note=note)
 
     def user_prompt(self, turn: Turn) -> str:
         """The turn as the judge sees it: history (if used), the user message, the reply."""

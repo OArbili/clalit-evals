@@ -1,6 +1,6 @@
 # Examples
 
-Standalone scripts for the installed package: `pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"` (or a wheel from a GitHub release), copy one, run it. Nothing
+Standalone scripts for the installed package: `pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"` (or a wheel from a GitHub release), copy one, run it. Nothing
 here imports from this repository. Each runs with `--offline` (a function stands in for the judge, no
 key) or against the judge your environment names (`ANTHROPIC_API_KEY`, or `OPENAI_API_KEY` /
 `OPENAI_BASE_URL` with `EVALS_JUDGE_MODEL`).
@@ -13,6 +13,7 @@ key) or against the judge your environment names (`ANTHROPIC_API_KEY`, or `OPENA
 | `04_custom_evaluator.py` | your own evaluators: a new dimension on the shared rubric, your own prompts, your own answer shape, a deterministic check | `clalit-evals` |
 | `05_many_turns.py` | fifty turns through a thread pool, pass rates and the rows to look at | `clalit-evals` |
 | `06_summary_evaluation.py` | an LLM summary against a human reference: SummaryFactCapture (recall) and SummaryFactPrecision (precision) on three summaries — facts missed, a claim invented, faithful — with `threshold=`, `capture_content=`, the count attributes and the two judge calls per verdict | `clalit-evals` |
+| `07_clinical_evaluators.py` | three clinical checks on a triage conversation — questions before routing, red flags ruled out, focused questioning — with a protocol of your own, and the protocol's version on the call record | `clalit-evals` |
 
 `../getting_started/` has the walkthroughs that run from a checkout of this repository (they share a
 stub Anthropic client and print more of what happens inside); `../docs/DEVELOPER_GUIDE.md` explains

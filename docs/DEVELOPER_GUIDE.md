@@ -16,8 +16,8 @@ Elastic / Langfuse / MLflow) lives in the companion repository, `OArbili/noy`.
 ## 0. Setup
 
 ```bash
-pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"              # the package (import name: evals)
-pip install "clalit-evals[anthropic] @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"   # + the Anthropic SDK;  [openai] + the openai SDK client
+pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"              # the package (import name: evals)
+pip install "clalit-evals[anthropic] @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"   # + the Anthropic SDK;  [openai] + the openai SDK client
 ```
 
 (The repository is private: the install needs a key or token that can read it. A wheel is attached
@@ -80,7 +80,7 @@ verdicts = ev.evaluate(user_input="...", agent_output="...", only=["empathy"])  
 print([e.name for e in ev.evaluators])
 ```
 
-The twelve built-in names:
+The fifteen built-in names:
 
 | Name | Kind | Checks |
 |---|---|---|
@@ -94,12 +94,29 @@ The twelve built-in names:
 | `appropriate_questioning` | judge | follow-up questions are relevant and proportionate (pre-check: no `?` → pass) |
 | `adaptability` | judge | the reply adjusts to a change in the member's situation |
 | `non_robotic` | judge | no mechanical, checklist-like phrasing |
+| `questions_before_routing` | judge, clinical | the information a routing depends on was collected before the reply routes the member |
+| `red_flags_ruled_out` | judge, clinical | red flags were ruled out before a non-urgent routing |
+| `focused_questioning` | judge, clinical | the questions in one reply are about one subject (pre-check: no `?` → pass) |
 | `summary_fact_capture` | judge, reference-based | recall: the share of the human reference's facts the LLM summary states (passes at ≥ 0.8) |
 | `summary_fact_precision` | judge, reference-based | precision: the share of the LLM summary's claims the reference supports (passes at 1.0) |
 
-Names are case-insensitive. Each of the nine judge dimensions is the same
+Names are case-insensitive. Each judge dimension is the same
 rubric with its own definition and fail criteria, so their verdicts are
 comparable; `docs/evaluators/` has one page per evaluator with Hebrew examples.
+
+The two routing checks judge against a clinical protocol. Their defaults are
+generic; pass the list your clinicians approved, and it is recorded in the
+prompt version of every judge call (`red_flags_ruled_out/v1+<hash>`):
+
+```python
+from evals.evaluators import QuestionsBeforeRoutingEvaluator, RedFlagsRuledOutEvaluator
+
+ev = Evals(evaluators=[
+    QuestionsBeforeRoutingEvaluator(required=["when the headache started", "pain level from 1 to 10", "nausea"]),
+    RedFlagsRuledOutEvaluator(red_flags=["sudden weakness", "difficulty speaking", "confusion"], require_all=True),
+    "focused_questioning",
+])
+```
 
 ---
 
@@ -337,7 +354,7 @@ class PolitenessEvaluator(LLMJudgeEvaluator):
 
 You inherit the rubric's six consistency rules, the missing-input check, the
 `{verdict, explanation}` schema, the error mapping and the call record. The
-verdicts are comparable with the nine built-in dimensions because they are
+verdicts are comparable with the built-in dimensions because they are
 produced the same way.
 
 ### 10.2 Option A — your own system and user prompt, still pass/fail

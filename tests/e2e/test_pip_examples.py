@@ -39,4 +39,4 @@ def test_installed_package_is_the_wheel_not_the_checkout(pip_python):
     python, work = pip_python
     r = subprocess.run([str(python), "-c", "import evals; print(evals.__file__, evals.__version__)"],
                        capture_output=True, text=True, cwd=work, env={"PATH": ""})
-    assert str(work) in r.stdout and str(ROOT) not in r.stdout and "0.2.0" in r.stdout
+    assert str(work) in r.stdout and str(ROOT) not in r.stdout and "0.3.0" in r.stdout

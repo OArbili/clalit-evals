@@ -1,4 +1,4 @@
-"""Unit tests for the shared LLM-judge base and the ten registered evaluators' contracts."""
+"""Unit tests for the shared LLM-judge base and the registered judge evaluators' contracts."""
 
 import json
 
@@ -27,11 +27,12 @@ def turn(**kw):
 
 
 class TestRegistry:
-    def test_twelve_evaluators_registered(self):
+    def test_fifteen_evaluators_registered(self):
         assert list(BUILTIN) == ["repetition", "relevance", "naturalness", "empathy", "attentiveness", "coherence",
                                  "context_retention", "appropriate_questioning", "adaptability", "non_robotic",
+                                 "questions_before_routing", "red_flags_ruled_out", "focused_questioning",
                                  "summary_fact_capture", "summary_fact_precision"]
-        assert len(JUDGES) == 9
+        assert len(JUDGES) == 12
 
     def test_build_is_case_insensitive_and_passes_judge_deps(self):
         client = FixedJudge("pass")

@@ -1,6 +1,6 @@
 """Many turns: the package evaluates one turn per call; a thread pool is the batch.
 
-    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"
+    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"
     python3 05_many_turns.py --offline
     python3 05_many_turns.py                       # the judge from the environment (50 judge calls)
 """

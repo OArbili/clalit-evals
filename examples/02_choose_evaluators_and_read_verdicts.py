@@ -1,6 +1,6 @@
 """Choose evaluators, read every field of a verdict, see how errors come back.
 
-    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"
+    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"
     python3 02_choose_evaluators_and_read_verdicts.py            # the judge from the environment
     python3 02_choose_evaluators_and_read_verdicts.py --offline
 """

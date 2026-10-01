@@ -224,7 +224,7 @@ def test_each_evaluator_lives_in_its_own_module():
 def test_names_resolve_through_the_registry_and_unknown_names_fail_early():
     from evals.evaluators import BUILTIN, build
 
-    assert {"repetition", "relevance"} <= set(BUILTIN) and len(BUILTIN) == 12
+    assert {"repetition", "relevance"} <= set(BUILTIN) and len(BUILTIN) == 15
     assert build("Repetition").name == "Repetition"
     with pytest.raises(ValueError, match="unknown evaluator"):
         Evals(evaluators=["toxicity"], judge_provider=StubClient("judge"))

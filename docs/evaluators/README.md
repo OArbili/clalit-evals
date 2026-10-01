@@ -14,6 +14,9 @@ One README per evaluator: what it checks, the inputs it reads, the rule as the j
 | [AppropriateQuestioning](appropriate_questioning.md) | `appropriate_questioning` | LLM judge | 1 / 0 | `agent_output`, `user_input`, `history` |
 | [Adaptability](adaptability.md) | `adaptability` | LLM judge | 1 / 0 | `agent_output`, `user_input`, `history` |
 | [NonRobotic](non_robotic.md) | `non_robotic` | LLM judge | 1 / 0 | `agent_output`, `user_input`, `history` |
+| [QuestionsBeforeRouting](questions_before_routing.md) | `questions_before_routing` | LLM judge | 1 / 0 | `agent_output`, `user_input`, `history` |
+| [RedFlagsRuledOut](red_flags_ruled_out.md) | `red_flags_ruled_out` | LLM judge | 1 / 0 | `agent_output`, `user_input`, `history` |
+| [FocusedQuestioning](focused_questioning.md) | `focused_questioning` | LLM judge | 1 / 0 | `agent_output`, `user_input`, `history` |
 | [SummaryFactCapture](summary_fact_capture.md) | `summary_fact_capture` | reference-based LLM judge | ratio, pass ≥ 0.8 | `agent_output`, `reference` |
 | [SummaryFactPrecision](summary_fact_precision.md) | `summary_fact_precision` | reference-based LLM judge | ratio, pass ≥ 1.0 | `agent_output`, `reference` |
 

@@ -3,6 +3,23 @@
 All notable changes to the `clalit-evals` package are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); the project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-10-02
+
+### Added
+
+- Three clinical evaluators on the shared judge rubric: `questions_before_routing` (were all the questions asked
+  before the routing?), `red_flags_ruled_out` (were red flags ruled out before a non-urgent routing?) and
+  `focused_questioning` (did the agent ask several unrelated questions in one message?). The first two take a
+  protocol — `QuestionsBeforeRoutingEvaluator(required=[...])`, `RedFlagsRuledOutEvaluator(red_flags=[...],
+  require_all=True)` — with generic defaults; a custom list is recorded in the prompt version of every judge call.
+- The labelled dataset grows to 21 conversations and 29 turns, with labels for the three new evaluators.
+- `examples/07_clinical_evaluators.py`.
+
+### Changed
+
+- `LLMJudgeEvaluator.system_prompt()` reads the instance when called on one, so criteria set per instance reach the
+  judge; calling it on the class, and overriding it as a classmethod, work as before.
+
 ## [0.2.0] - 2026-09-30
 
 The first release of the evaluators; the package moved here from the proof-of-concept repository (OArbili/noy), where

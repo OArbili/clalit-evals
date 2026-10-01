@@ -64,7 +64,9 @@ class ScriptedJudge:
     _REPLY = re.compile(r"<assistant_reply>\n(.*?)\n</assistant_reply>", re.S)
     _KEY = {"Repetition": "repetition", "Relevance": "relevance", "Naturalness": "naturalness", "Empathy": "empathy",
             "Attentiveness": "attentiveness", "Coherence": "coherence", "ContextRetention": "context_retention",
-            "AppropriateQuestioning": "appropriate_questioning", "Adaptability": "adaptability", "NonRobotic": "non_robotic"}
+            "AppropriateQuestioning": "appropriate_questioning", "Adaptability": "adaptability", "NonRobotic": "non_robotic",
+            "QuestionsBeforeRouting": "questions_before_routing", "RedFlagsRuledOut": "red_flags_ruled_out",
+            "FocusedQuestioning": "focused_questioning"}
 
     def __init__(self, expected_turns: list[dict]) -> None:
         self._by_reply = {t["agent_output"]: t for t in expected_turns}

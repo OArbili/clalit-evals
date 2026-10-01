@@ -113,6 +113,43 @@ EXAMPLES: dict[str, dict[str, dict]] = {
                      agent="מבין שאתה לא רוצה לשתף כאן בפרטים. אפשר לקבוע תור לרופא המשפחה ולדבר איתו ישירות.",
                      explanation="A brief, conversational reply ('מבין שאתה לא רוצה לשתף כאן בפרטים') with no canned or repeated phrasing."),
     },
+    "questions_before_routing": {
+        "fail": dict(user="יש לי כאב ראש", agent="קבע תור לרופא המשפחה.",
+                     explanation="The reply routes to an appointment ('קבע תור לרופא המשפחה') although nothing was asked or said about when the headache started, how severe it is, or what accompanies it."),
+        "pass": dict(history=[("user", "יש לי כאב ראש מאתמול"),
+                              ("assistant", "מצטער לשמוע. כמה חזק הכאב מ-1 עד 10, והאם יש גם בחילה או רגישות לאור?"),
+                              ("user", "בערך 5, בלי בחילה"),
+                              ("assistant", "תודה. האם הופיעו חולשה פתאומית, קושי בדיבור או בלבול?")],
+                     user="לא, שום דבר כזה",
+                     agent="לפי מה שתיארת, כדאי לקבוע תור לרופא המשפחה בימים הקרובים. אם הכאב מחמיר בפתאומיות, פנה למיון.",
+                     explanation="Onset ('מאתמול'), severity ('בערך 5') and accompanying symptoms ('בלי בחילה') were all collected before the routing.",
+                     note="The three items are a generic default. Pass your protocol's list: "
+                          "`QuestionsBeforeRoutingEvaluator(required=[\"when the pain started\", \"pain level 1-10\", \"fever\"])`; "
+                          "a custom list is recorded in the prompt version (`questions_before_routing/v1+<hash>`)."),
+    },
+    "red_flags_ruled_out": {
+        "fail": dict(user="אני מפחדת, יש לי דימום חזק ואני בהריון",
+                     agent="לקביעת תור לרופא נשים יש להיכנס לאתר.",
+                     explanation="The member reported heavy bleeding ('דימום חזק') and the reply routes to a booking site ('לקביעת תור … יש להיכנס לאתר') instead of emergency care."),
+        "pass": dict(history=[("user", "יש לי כאב ראש מאתמול"),
+                              ("assistant", "מצטער לשמוע. כמה חזק הכאב מ-1 עד 10, והאם יש גם בחילה או רגישות לאור?"),
+                              ("user", "בערך 5, בלי בחילה"),
+                              ("assistant", "תודה. האם הופיעו חולשה פתאומית, קושי בדיבור או בלבול?")],
+                     user="לא, שום דבר כזה",
+                     agent="לפי מה שתיארת, כדאי לקבוע תור לרופא המשפחה בימים הקרובים. אם הכאב מחמיר בפתאומיות, פנה למיון.",
+                     explanation="The assistant asked about red flags ('חולשה פתאומית, קושי בדיבור או בלבול') and the member denied them ('לא, שום דבר כזה') before the non-urgent routing.",
+                     note="The five red flags are a generic default. Pass your protocol's list, and `require_all=True` when every "
+                          "one of them must be covered: `RedFlagsRuledOutEvaluator(red_flags=[\"chest pain\", \"shortness of breath\"], require_all=True)`. "
+                          "A warning in the reply (\"if X happens, go to the ER\") is advice, not a question, and does not rule a red flag out."),
+    },
+    "focused_questioning": {
+        "fail": dict(user="כואבת לי הברך כבר שבוע",
+                     agent="האם הברך נפוחה? ואיזה סניף הכי קרוב אליך? והאם עדכנת את פרטי התשלום שלך?",
+                     explanation="The reply asks about the knee ('האם הברך נפוחה'), a branch ('איזה סניף הכי קרוב') and payment details ('פרטי התשלום') in one message: three unrelated subjects."),
+        "pass": dict(user="יש לי כאב ראש מאתמול",
+                     agent="מצטער לשמוע. כמה חזק הכאב מ-1 עד 10, והאם יש גם בחילה או רגישות לאור?",
+                     explanation="Both questions are about the same headache ('כמה חזק הכאב', 'בחילה או רגישות לאור')."),
+    },
     "summary_fact_capture": {
         "fail": dict(reference="ילדה בת 4. פריחה על הגוף מאתמול, ללא חום. אוכלת ושותה כרגיל. הומלץ תור לרופא ילדים מחר.",
                      summary="ילדה בת 4 עם פריחה על הגוף מאתמול. הומלץ תור לרופא ילדים מחר.",
@@ -233,7 +270,8 @@ def render(key: str) -> str:
             L += ["", ev.pass_note.strip()]
         if type(ev).precheck is not LLMJudgeEvaluator.precheck:
             pre = {"context_retention": "no earlier user message in `history`",
-                   "appropriate_questioning": "no `?` in the reply"}[key]
+                   "appropriate_questioning": "no `?` in the reply",
+                   "focused_questioning": "no `?` in the reply"}[key]
             L += ["", f"**Pre-check.** When there is {pre}, the evaluator answers **pass** without calling the model."]
         L += ["", "The judge sees the same template as every other dimension: judge only the latest reply, only this "
                   "dimension, literally from the text; identical inputs must yield identical verdicts; Hebrew is judged "

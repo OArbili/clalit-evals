@@ -1,6 +1,6 @@
 """An LLM-written summary against a human-written reference, fact by fact: the two summary evaluators.
 
-    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"
+    pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"
     python3 06_summary_evaluation.py --offline     # a function stands in for the judge, no key
     python3 06_summary_evaluation.py               # the judge from the environment (4 judge calls per summary)
 

@@ -13,6 +13,8 @@
     appropriate_questioning.py  AppropriateQuestioning (pre-check: no question asked -> pass)
     adaptability.py             Adaptability
     non_robotic.py              NonRobotic
+    routing.py                  QuestionsBeforeRouting, RedFlagsRuledOut (clinical; the protocol lists are parameters)
+    focused_questioning.py      FocusedQuestioning (pre-check: no question asked -> pass)
     summary_facts.py            SummaryFactCapture, SummaryFactPrecision (reference-based, ratio scores)
 
 To add one: create a module here with an `Evaluator` subclass (a one-prompt
@@ -36,10 +38,12 @@ from .base import Evaluator
 from .coherence import CoherenceEvaluator
 from .context_retention import ContextRetentionEvaluator
 from .empathy import EmpathyEvaluator
+from .focused_questioning import FocusedQuestioningEvaluator
 from .naturalness import NaturalnessEvaluator
 from .non_robotic import NonRoboticEvaluator
 from .relevance import RelevanceEvaluator
 from .repetition import RepetitionEvaluator
+from .routing import QuestionsBeforeRoutingEvaluator, RedFlagsRuledOutEvaluator
 from .summary_facts import SummaryFactCaptureEvaluator, SummaryFactPrecisionEvaluator
 
 __all__ = [
@@ -47,6 +51,7 @@ __all__ = [
     "RepetitionEvaluator", "RelevanceEvaluator", "NaturalnessEvaluator", "EmpathyEvaluator",
     "AttentivenessEvaluator", "CoherenceEvaluator", "ContextRetentionEvaluator",
     "AppropriateQuestioningEvaluator", "AdaptabilityEvaluator", "NonRoboticEvaluator",
+    "QuestionsBeforeRoutingEvaluator", "RedFlagsRuledOutEvaluator", "FocusedQuestioningEvaluator",
     "SummaryFactCaptureEvaluator", "SummaryFactPrecisionEvaluator",
 ]
 
@@ -71,6 +76,9 @@ BUILTIN: dict[str, Callable[..., Evaluator]] = {
     "appropriate_questioning": _judge(AppropriateQuestioningEvaluator),
     "adaptability": _judge(AdaptabilityEvaluator),
     "non_robotic": _judge(NonRoboticEvaluator),
+    "questions_before_routing": _judge(QuestionsBeforeRoutingEvaluator),
+    "red_flags_ruled_out": _judge(RedFlagsRuledOutEvaluator),
+    "focused_questioning": _judge(FocusedQuestioningEvaluator),
     "summary_fact_capture": _judge(SummaryFactCaptureEvaluator),
     "summary_fact_precision": _judge(SummaryFactPrecisionEvaluator),
 }

@@ -2,8 +2,10 @@
 
 Repetition (deterministic), nine LLM-as-judge dimensions (Relevance,
 Naturalness, Empathy, Attentiveness, Coherence, ContextRetention,
-AppropriateQuestioning, Adaptability, NonRobotic) and two reference-based
-summary evaluators (SummaryFactCapture, SummaryFactPrecision).
+AppropriateQuestioning, Adaptability, NonRobotic), three clinical checks on
+the same rubric (QuestionsBeforeRouting, RedFlagsRuledOut, FocusedQuestioning)
+and two reference-based summary evaluators (SummaryFactCapture,
+SummaryFactPrecision).
 
 Headline name: `Evals`. Everything else is a return type (Turn, Verdict,
 Verdicts, JudgeCall) or a Provider from evals.providers. No model SDK

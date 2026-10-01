@@ -17,9 +17,9 @@ can read it — `gh auth login` on a workstation, a fine-grained token in CI, or
 with an SSH key (a wheel and sdist are attached to every GitHub release as well):
 
 ```bash
-pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"
-pip install "clalit-evals[anthropic] @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"   # + the Anthropic SDK
-pip install "clalit-evals[openai] @ git+https://github.com/OArbili/clalit-evals.git@v0.2.0"      # + the openai SDK client
+pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"
+pip install "clalit-evals[anthropic] @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"   # + the Anthropic SDK
+pip install "clalit-evals[openai] @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"      # + the openai SDK client
 ```
 
 The judge over any OpenAI-compatible endpoint needs nothing beyond the package. The import name is `evals`.
@@ -55,11 +55,16 @@ Relevance   pass   The reply recommends a care pathway for the fever and sore th
 | `appropriate_questioning` | judge | follow-up questions are relevant and proportionate |
 | `adaptability` | judge | the reply adjusts to a change in the member's situation |
 | `non_robotic` | judge | no mechanical, checklist-like phrasing |
+| `questions_before_routing` | judge, clinical | the information a routing depends on was collected before the reply routes the member (protocol list is a parameter) |
+| `red_flags_ruled_out` | judge, clinical | red flags were ruled out before a non-urgent routing (protocol list is a parameter) |
+| `focused_questioning` | judge, clinical | the questions in one reply are about one subject |
 | `summary_fact_capture` | judge, reference-based | recall: the share of a human reference's facts an LLM summary states |
 | `summary_fact_precision` | judge, reference-based | precision: the share of the LLM summary's claims the reference supports |
 
-The nine judge dimensions share one rubric and one answer schema, so their verdicts are
-comparable; each contributes only its definition and its literal fail criteria. Hebrew
+The judge dimensions share one rubric and one answer schema, so their verdicts are
+comparable; each contributes only its definition and its literal fail criteria. The two
+routing checks take your clinical protocol:
+`RedFlagsRuledOutEvaluator(red_flags=[...], require_all=True)`; their defaults are generic. Hebrew
 and English are judged in their own language; explanations are one English sentence.
 
 ```python
@@ -125,11 +130,11 @@ that SDK. MIT licence.
 
 ## Examples
 
-[examples/](examples/) has five standalone scripts for the installed package — copy one and run it,
+[examples/](examples/) has seven standalone scripts for the installed package — copy one and run it,
 `--offline` for no key: the first call; choosing evaluators and reading every field of a verdict;
 the judge through an `openai` client or an OpenAI-compatible endpoint; your own evaluators three
 ways; fifty turns through a thread pool; an LLM summary against a human reference with the two summary
-evaluators. The test suite runs them against a freshly built wheel in
+evaluators; the three clinical checks with a protocol of your own. The test suite runs them against a freshly built wheel in
 a clean virtual environment, so they are exactly what the installed package gives you.
 
 ## Development

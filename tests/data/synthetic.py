@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 
 DIMENSIONS = ["repetition", "relevance", "naturalness", "empathy", "attentiveness", "coherence",
-              "context_retention", "appropriate_questioning", "adaptability", "non_robotic"]
+              "context_retention", "appropriate_questioning", "adaptability", "non_robotic",
+              "questions_before_routing", "red_flags_ruled_out", "focused_questioning"]
 INACTIVITY = "לא זוהתה פעילות"
 PATH = Path(__file__).with_name("synthetic_conversations.jsonl")
 
