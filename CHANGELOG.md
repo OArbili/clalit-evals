@@ -3,6 +3,13 @@
 All notable changes to the `clalit-evals` package are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); the project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- The repository is public (2026-10-02): installing from it, or from the wheel on a release, needs no credentials.
+  The README, the developer guide and the release workflow say so. The package is still not on PyPI. No code change.
+
 ## [0.3.0] - 2026-10-02
 
 ### Added
@@ -23,8 +30,8 @@ All notable changes to the `clalit-evals` package are documented here. The forma
 ## [0.2.0] - 2026-09-30
 
 The first release of the evaluators; the package moved here from the proof-of-concept repository (OArbili/noy), where
-its history up to this point lives. Released as a wheel on the GitHub release, not on PyPI: this repository
-is private. (0.1.0 was a placeholder with a single `hello_world()`, and is what the PyPI name still holds.)
+its history up to this point lives. Released as a wheel on the GitHub release, not on PyPI; the repository
+was private at the time. (0.1.0 was a placeholder with a single `hello_world()`, and is what the PyPI name still holds.)
 
 ### Added
 

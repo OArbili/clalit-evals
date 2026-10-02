@@ -20,13 +20,13 @@ pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3
 pip install "clalit-evals[anthropic] @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"   # + the Anthropic SDK;  [openai] + the openai SDK client
 ```
 
-(The repository is private: the install needs a key or token that can read it. A wheel is attached
-to every GitHub release too.)
+(The repository is public: the install needs no key or token. A wheel is attached to every GitHub
+release too. The package is not on PyPI, so the URL is required.)
 
 Or from a checkout of the repository, which also has the tests and the examples:
 
 ```bash
-git clone git@github.com:OArbili/clalit-evals.git && cd clalit-evals
+git clone https://github.com/OArbili/clalit-evals.git && cd clalit-evals
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 ```

@@ -13,7 +13,7 @@ license-files = ["LICENSE"]
 authors = [{ name = "Ofir Arbili", email = "ofir.arbili@gmail.com" }]
 keywords = ["evals", "llm", "evaluation", "llm-as-a-judge", "agent", "hebrew", "opentelemetry", "genai"]
 classifiers = [
-  "Private :: Do Not Upload",   # PyPI rejects any distribution carrying this classifier
+  "Private :: Do Not Upload",   # keeps the package off PyPI (it rejects this classifier); the repository itself is public
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",

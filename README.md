@@ -10,17 +10,24 @@ no storage, no dependencies.
 This is a proof of concept. The framework is this package; the proof around it — a REST
 service that hosts it and reports every verdict as OpenTelemetry, sinks for Elastic,
 Langfuse and MLflow, browser UIs, the specification, runs on real exports — is in the
-companion repository, `OArbili/noy`.
+companion repository, `OArbili/noy`, which is private.
 
-This is a private repository; the package is installed from it, by release tag, with credentials that
-can read it — `gh auth login` on a workstation, a fine-grained token in CI, or `git+ssh://git@github.com/...`
-with an SSH key (a wheel and sdist are attached to every GitHub release as well):
+The repository is public and the code is MIT-licensed. The package is installed from here, by release
+tag; no account, key or token is needed:
 
 ```bash
 pip install "clalit-evals @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"
 pip install "clalit-evals[anthropic] @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"   # + the Anthropic SDK
 pip install "clalit-evals[openai] @ git+https://github.com/OArbili/clalit-evals.git@v0.3.0"      # + the openai SDK client
 ```
+
+Without git, install the wheel attached to the [release](https://github.com/OArbili/clalit-evals/releases):
+
+```bash
+pip install https://github.com/OArbili/clalit-evals/releases/download/v0.3.0/clalit_evals-0.3.0-py3-none-any.whl
+```
+
+The package is not on PyPI: `pip install clalit-evals` without the URL gets an old placeholder, not this code.
 
 The judge over any OpenAI-compatible endpoint needs nothing beyond the package. The import name is `evals`.
 
@@ -99,7 +106,7 @@ verdicts.to_dict()              # the serialisable form, ids and record included
 The record is what a host needs to report or bill each verdict — as OpenTelemetry
 spans and a `gen_ai.evaluation.result` event, a Langfuse score, an MLflow feedback, a
 row in Elastic. The package produces none of those; a host does (the POC's REST service,
-in the companion repository, is one such host).
+in the private companion repository, is one such host).
 
 ## Your own evaluator
 
@@ -140,7 +147,7 @@ a clean virtual environment, so they are exactly what the installed package give
 ## Development
 
 ```bash
-git clone git@github.com:OArbili/clalit-evals.git && cd clalit-evals
+git clone https://github.com/OArbili/clalit-evals.git && cd clalit-evals
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest                                  # offline: scripted judges, no key
@@ -153,4 +160,4 @@ evaluator; `providers/` the judge adapters; `vocab.py` the values a verdict is w
 labelled Hebrew/English dataset (`tests/data/`); `tools/build_evaluator_docs.py` regenerates
 `docs/evaluators/` from the prompts in the code. Releases: bump `version` in `pyproject.toml`, add a
 `CHANGELOG.md` entry, commit, then `gh release create vX.Y.Z`: `.github/workflows/release.yml` builds the wheel
-and sdist and attaches them to the release. Nothing is published outside this repository.
+and sdist and attaches them to the release. Nothing is uploaded to PyPI.

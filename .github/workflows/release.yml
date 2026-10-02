@@ -1,7 +1,7 @@
 name: Release
 
 # A GitHub release (gh release create vX.Y.Z) builds the wheel and sdist and attaches them to it.
-# Nothing is published outside this private repository.
+# The release assets are public, like the repository. Nothing is uploaded to PyPI.
 
 on:
   release:
